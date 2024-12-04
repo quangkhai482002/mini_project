@@ -1,21 +1,21 @@
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Radio from '@mui/material/Radio';
-import Badge from '@mui/material/Badge';
-import Button from '@mui/material/Button';
-import Drawer from '@mui/material/Drawer';
-import Rating from '@mui/material/Rating';
-import Divider from '@mui/material/Divider';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
-import RadioGroup from '@mui/material/RadioGroup';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Radio from "@mui/material/Radio";
+import Badge from "@mui/material/Badge";
+import Button from "@mui/material/Button";
+import Drawer from "@mui/material/Drawer";
+import Rating from "@mui/material/Rating";
+import Divider from "@mui/material/Divider";
+import Checkbox from "@mui/material/Checkbox";
+import FormGroup from "@mui/material/FormGroup";
+import RadioGroup from "@mui/material/RadioGroup";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { Iconify } from "../../components/iconify';
-import { Scrollbar } from "../../components/scrollbar';
-import { ColorPicker } from "../../components/color-utils';
+import { Iconify } from "../../components/iconify";
+import { Scrollbar } from "../../components/scrollbar";
+import { ColorPicker } from "../../components/color-utils";
 
 // ----------------------------------------------------------------------
 
@@ -106,7 +106,10 @@ export function ProductFilters({
       <Typography variant="subtitle2">Colors</Typography>
       <ColorPicker
         selected={filters.colors}
-        onSelectColor={(colors) => onSetFilters({ colors: colors as string[] })}
+        // onSelectColor={(colors: string[]) => onSetFilters({ colors })}
+        onSelectColor={(colors: string | string[]) =>
+          onSetFilters({ colors: Array.isArray(colors) ? colors : [colors] })
+        }
         colors={options.colors}
         limit={6}
       />
@@ -149,14 +152,14 @@ export function ProductFilters({
             gap: 1,
             ml: -1,
             p: 0.5,
-            display: 'flex',
+            display: "flex",
             borderRadius: 1,
-            cursor: 'pointer',
-            typography: 'body2',
-            alignItems: 'center',
-            '&:hover': { opacity: 0.48 },
+            cursor: "pointer",
+            typography: "body2",
+            alignItems: "center",
+            "&:hover": { opacity: 0.48 },
             ...(filters.rating === option && {
-              bgcolor: 'action.selected',
+              bgcolor: "action.selected",
             }),
           }}
         >
@@ -186,10 +189,14 @@ export function ProductFilters({
         open={openFilter}
         onClose={onCloseFilter}
         PaperProps={{
-          sx: { width: 280, overflow: 'hidden' },
+          sx: { width: 280, overflow: "hidden" },
         }}
       >
-        <Box display="flex" alignItems="center" sx={{ pl: 2.5, pr: 1.5, py: 2 }}>
+        <Box
+          display="flex"
+          alignItems="center"
+          sx={{ pl: 2.5, pr: 1.5, py: 2 }}
+        >
           <Typography variant="h6" flexGrow={1}>
             Filters
           </Typography>
